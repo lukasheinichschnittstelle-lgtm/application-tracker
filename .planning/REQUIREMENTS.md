@@ -14,7 +14,8 @@ Die IDs `FT-01` bis `FT-12` sind die **festen Feature-Nummern** der Mockup-Schle
 | FT-01 | Liste aller Bewerbungen, neueste zuerst, je Zeile Firma, Stelle, Status und Versanddatum | Mock-up |
 | FT-02 | Status in sechs Stufen mit eigener Farbe: To apply, Sent, Got a reply, Interview, Rejected, Offer. Wechsel per Auswahlmenü | Mock-up |
 | FT-03 | Verlässt eine Bewerbung „To apply“ und hat noch kein Versanddatum, wird das heutige Datum gesetzt. Ohne Datum steht „Not sent yet“ | Mock-up |
-| FT-04 | Freie Notiz je Bewerbung, sichtbar und direkt bearbeitbar | Mock-up |
+| FT-04 | Notizen als Verlauf mit Datum (neueste oben), je Eintrag mehrere Absätze, änderbar und löschbar (mit Rückfrage), in der Zeile aufklappbar. Eine Notiz aus v0.1.0 wird erster Eintrag | Mock-up; geändert 17.11.2026 nach Test durch Lukas („nur ein Absatz, muss ausgebaut werden“), Form per Rückfrage gewählt |
+| FT-14 | Nächster Schritt je Bewerbung mit optionalem Fälligkeitsdatum; fällige Bewerbungen sind rot hervorgehoben, auch zugeklappt sichtbar | Lukas 17.11.2026 (Rückfrage „sauber abarbeiten“) |
 | FT-05 | Bewerbung hinzufügen: Firma (Pflicht), Stelle, Link. Neue Einträge starten mit „To apply“ | Mock-up |
 | FT-06 | Kennzahlen-Zeile mit vier Zählern: total, sent, replies, interviews | Mock-up; „replies“ zählt jede Antwort (Got a reply, Interview, Rejected, Offer), T6 entschieden 17.11.2026 |
 | FT-07 | Der Link ist ein eigenes Feld; ein Klick öffnet ihn im Standardbrowser | **Vorschlag**: Das Mock-up schreibt den Link in die Notiz, das Glossar nennt „Link“ als Feld |
@@ -75,14 +76,15 @@ Bewusst aufgeschoben, kommt nur bei echtem Bedarf:
 | FT-11 | Phase 2 | Pending |
 | FT-12 | Phase 2 | Pending |
 | FT-13 | Phase 3 | Pending |
+| FT-04 (Verlauf), FT-14 | Phase 4 | Gebaut, v0.2.0 |
 | INST-01 | Phase 3 | Pending |
 | INST-02 | Phase 1 (Test-Lauf), Phase 3 (Release) | Pending |
 | INST-03 | Phase 3 | Pending |
 | INST-04 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 17 total (13 Features, 4 Auslieferung)
-- Mapped to phases: 17
+- v1 requirements: 18 total (14 Features, 4 Auslieferung)
+- Mapped to phases: 18
 - Unmapped: 0 ✓
 
 ---

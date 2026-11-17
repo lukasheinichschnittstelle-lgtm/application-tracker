@@ -2,11 +2,11 @@
 gsd_state_version: '1.0'
 status: executing
 progress:
-  total_phases: 3
-  completed_phases: 2
-  total_plans: 4
-  completed_plans: 3
-  percent: 75
+  total_phases: 4
+  completed_phases: 3
+  total_plans: 5
+  completed_plans: 4
+  percent: 80
 ---
 
 # Project State
@@ -22,10 +22,10 @@ See: .planning/PROJECT.md (updated 2026-11-17)
 
 Phase: 3 of 3 (Auslieferung und Abnahme)
 Plan: 2 of 2 (03-02 Abnahme auf dem Mac)
-Status: v0.1.0 veröffentlicht, Abnahme durch eine zweite Sitzung auf dem Mac ausstehend
-Last activity: 2026-11-17 — Phasen 1–3 gebaut, CI grün, Release v0.1.0
+Status: v0.2.0 veröffentlicht (Notizen-Verlauf, nächster Schritt), Abnahme durch eine zweite Sitzung auf dem Mac ausstehend
+Last activity: 2026-11-17 — Phase 4 nach Lukas' erstem Test gebaut, CI grün (11 Tests), Release v0.2.0
 
-Progress: [████████░░] 75%
+Progress: [████████░░] 80%
 
 ## Accumulated Context
 

@@ -9,6 +9,7 @@ Drei grobe Phasen. Zuerst entsteht der Kern, der Daten sicher speichert. Er wird
 - [x] **Phase 1: Kern und Speicherung** - Datenmodell, sichere JSON-Datei und Zählweise, getestet auf GitHub Actions
 - [x] **Phase 2: Oberfläche im Gepard-Design** - Ein Fenster mit Liste, Status, Notizen, Hinzufügen und Kennzahlen, Hell und Dunkel
 - [ ] **Phase 3: Auslieferung und Abnahme** - Release-Zip, Ein-Befehl-Installer und Update, README, Abnahme auf dem Mac
+- [x] **Phase 4: Notizen-Verlauf und nächster Schritt** - nach Lukas' erstem Test (17.11.2026): FT-04 ausgebaut, FT-14 neu, Release v0.2.0
 
 ## Phase Details
 
@@ -67,7 +68,7 @@ Auf dem Mac, je Punkt ein Beleg (Befehl und gekürzte Ausgabe oder Bildschirmfot
 1. Installation mit dem einen Befehl. Kein Gatekeeper-Dialog; `xattr -l ~/Applications/Application\ Tracker.app` zeigt kein `com.apple.quarantine`
 2. FT-05: Drei Bewerbungen anlegen, eine ohne Firma wird abgelehnt
 3. FT-02/FT-03: Status von „To apply“ auf „Sent“ stellen; das heutige Datum erscheint
-4. FT-04: Notiz tippen und die App sofort mit `kill -9` beenden. Nach dem Neustart ist die Notiz da (FT-09)
+4. FT-04: Notiz mit zwei Absätzen hinzufügen, eine ändern, eine löschen (Rückfrage). Nächsten Schritt tippen und die App sofort mit `kill -9` beenden; nach dem Neustart ist alles da (FT-09)
 5. Laptop zuklappen, aufklappen: Die Daten sind da
 6. FT-06: Die Zähler stimmen von Hand nachgezählt
 7. FT-07: Ein Klick auf den Link öffnet den Browser
@@ -79,6 +80,7 @@ Auf dem Mac, je Punkt ein Beleg (Befehl und gekürzte Ausgabe oder Bildschirmfot
 13. Kein Netz: `lsof -i -a -p $(pgrep -x ApplicationTracker)` ist leer
 14. Deinstallation nach README funktioniert
 15. FT-13: Im Dock und im Finder erscheint das „B“-Icon
+16. FT-14: Nächsten Schritt mit Datum heute setzen: Rahmen und „Next:“-Zeile rot, auch zugeklappt; „Clear“ entfernt ihn
 
 ## Progress
 
@@ -87,3 +89,4 @@ Auf dem Mac, je Punkt ein Beleg (Befehl und gekürzte Ausgabe oder Bildschirmfot
 | 1. Kern und Speicherung | 1/1 | Complete | 2026-11-17 |
 | 2. Oberfläche im Gepard-Design | 1/1 | Complete (Abnahme am Mac offen) | 2026-11-17 |
 | 3. Auslieferung und Abnahme | 1/2 | Abnahme am Mac offen | - |
+| 4. Notizen-Verlauf und nächster Schritt | 1/1 | Gebaut, CI grün, v0.2.0 (Abnahme am Mac offen) | 2026-11-17 |
