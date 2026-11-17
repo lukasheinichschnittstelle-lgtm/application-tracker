@@ -22,7 +22,7 @@ See: .planning/PROJECT.md (updated 2026-11-17)
 
 Phase: 1 of 3 (Kern und Speicherung)
 Plan: 0 of 1 in current phase
-Status: Planning, nicht bauen bis zum OK des Betreuers
+Status: Ready to execute (erst nach OK des Betreuers)
 Last activity: 2026-11-17 — Projekt angelegt, Phase 1 besprochen und geplant
 
 Progress: [░░░░░░░░░░] 0%
