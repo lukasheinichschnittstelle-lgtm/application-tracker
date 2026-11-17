@@ -1,0 +1,13 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: No private e-mail addresses in the repo
+        run: |
+          if git grep -nIE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' | grep -v 'users.noreply.github.com' | grep -v 'noreply@anthropic.com'; then exit 1; fi
+      - run: swift --version
+      - run: swift test
