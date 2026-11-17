@@ -16,11 +16,11 @@ Die IDs `FT-01` bis `FT-12` sind die **festen Feature-Nummern** der Mockup-Schle
 | FT-03 | Verlässt eine Bewerbung „To apply“ und hat noch kein Versanddatum, wird das heutige Datum gesetzt. Ohne Datum steht „Not sent yet“ | Mock-up |
 | FT-04 | Freie Notiz je Bewerbung, sichtbar und direkt bearbeitbar | Mock-up |
 | FT-05 | Bewerbung hinzufügen: Firma (Pflicht), Stelle, Link. Neue Einträge starten mit „To apply“ | Mock-up |
-| FT-06 | Kennzahlen-Zeile mit vier Zählern: total, sent, replies, interviews | Mock-up; Zählweise von „replies“ offen (T6) |
+| FT-06 | Kennzahlen-Zeile mit vier Zählern: total, sent, replies, interviews | Mock-up; „replies“ zählt jede Antwort (Got a reply, Interview, Rejected, Offer), T6 entschieden 17.11.2026 |
 | FT-07 | Der Link ist ein eigenes Feld; ein Klick öffnet ihn im Standardbrowser | **Vorschlag**: Das Mock-up schreibt den Link in die Notiz, das Glossar nennt „Link“ als Feld |
 | FT-08 | Bewerbung bearbeiten (Firma, Stelle, Link, Versanddatum) und löschen; Löschen nur nach Rückfrage | **Vorschlag**, nicht im Mock-up |
 | FT-09 | Jede Änderung wird sofort atomar in die Datendatei geschrieben; Beenden, Absturz oder Zuklappen kosten nichts | Q3, Q4 |
-| FT-10 | Beim Start wird die vorige Datendatei als Sicherungskopie abgelegt. Eine unlesbare Datei wird nie überschrieben, sondern beiseitegelegt, mit Hinweis. Menüpunkt „Show Data in Finder“ | **Vorschlag** (ersetzt Export/Import, T7) |
+| FT-10 | Beim Start wird die vorige Datendatei als Sicherungskopie abgelegt. Eine unlesbare Datei wird nie überschrieben, sondern beiseitegelegt, mit Hinweis. Menüpunkt „Show Data in Finder“ | Vorschlag, bestätigt 17.11.2026 (T7, ersetzt Export/Import) |
 | FT-11 | Aussehen nach dem neuen Gepard-Design (Farben, Schriften, Paneel, eckige Knöpfe, Umriss-Etiketten), Hell/Dunkel folgt dem System, im Dunkeln mit Farbnebel | Q8 |
 | FT-12 | Leere Liste mit kurzem Hinweis „Add your first application“ | **Vorschlag**, Folge aus T5 (keine Demo) |
 

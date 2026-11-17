@@ -60,7 +60,8 @@ Die Feature-Nummern `FT-xx` sind fest (Mockup-Schleife). Vollständige Liste: [R
 | Name „Application Tracker“, Repo `application-tracker`, UI Englisch (T3, F7) | Wie das Mock-up | ✓ bestätigt |
 | MIT-Lizenz (T2) | Kurz und üblich | ✓ bestätigt |
 | Keine Demo (T5) | Keine Vermischung von Beispiel- und echten Daten | ✓ bestätigt |
-| Sicherungskopie beim Start statt Export/Import (FT-10) | Eine Zeile Code statt zweier Dialoge; schützt vor kaputter Datei und vor schlechten Updates | — Vorschlag, offen (T7) |
+| Sicherungskopie beim Start statt Export/Import (FT-10, T7) | Wenige Zeilen statt zweier Dialoge; schützt vor kaputter Datei und vor schlechten Updates | ✓ bestätigt 17.11.2026 |
+| „replies“ zählt jede Antwort der Firma (FT-06, T6) | Glossar: Rückmeldung = Antwort gleich welcher Art; weicht vom Mock-up ab | ✓ bestätigt 17.11.2026 |
 | Schriften über `ATSApplicationFontsPath` statt SPM-Ressourcen | SPM-Ressourcenbündel im handgebauten `.app` brechen die Signatur; der Info.plist-Schlüssel braucht keinen Code | — Pending |
 
 ## Evolution
