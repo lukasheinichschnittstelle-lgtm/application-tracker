@@ -23,7 +23,7 @@ See: .planning/PROJECT.md (updated 2026-11-17)
 Phase: 3 of 3 (Auslieferung und Abnahme)
 Plan: 2 of 2 (03-02 Abnahme auf dem Mac)
 Status: v0.2.0 veröffentlicht (Notizen-Verlauf, nächster Schritt), Abnahme durch eine zweite Sitzung auf dem Mac ausstehend
-Last activity: 2026-11-17 — Phase 4 nach Lukas' erstem Test gebaut, CI grün (11 Tests), Release v0.2.0
+Last activity: 2026-11-17 — Phase 4 nach dem ersten Test des Betreuers gebaut, CI grün (11 Tests), Release v0.2.0
 
 Progress: [████████░░] 80%
 

@@ -9,7 +9,7 @@ Drei grobe Phasen. Zuerst entsteht der Kern, der Daten sicher speichert. Er wird
 - [x] **Phase 1: Kern und Speicherung** - Datenmodell, sichere JSON-Datei und Zählweise, getestet auf GitHub Actions
 - [x] **Phase 2: Oberfläche im Gepard-Design** - Ein Fenster mit Liste, Status, Notizen, Hinzufügen und Kennzahlen, Hell und Dunkel
 - [ ] **Phase 3: Auslieferung und Abnahme** - Release-Zip, Ein-Befehl-Installer und Update, README, Abnahme auf dem Mac
-- [x] **Phase 4: Notizen-Verlauf und nächster Schritt** - nach Lukas' erstem Test (17.11.2026): FT-04 ausgebaut, FT-14 neu, Release v0.2.0
+- [x] **Phase 4: Notizen-Verlauf und nächster Schritt** - nach dem ersten Test des Betreuers (17.11.2026): FT-04 ausgebaut, FT-14 neu, Release v0.2.0
 
 ## Phase Details
 
