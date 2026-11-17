@@ -1,8 +1,15 @@
 name: CI
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+
+permissions:
+  contents: write
 
 jobs:
-  test:
+  build:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
@@ -11,3 +18,21 @@ jobs:
           if git grep -nIE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' | grep -v 'users.noreply.github.com' | grep -v 'noreply@anthropic.com'; then exit 1; fi
       - run: swift --version
       - run: swift test
+        env:
+          SNAPSHOT_DIR: ${{ github.workspace }}/snapshots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: snapshots
+          path: snapshots/
+      - name: Build app bundle
+        run: scripts/build-app.sh "${GITHUB_REF_NAME#v}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: build/ApplicationTracker.zip
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" build/ApplicationTracker.zip --title "$GITHUB_REF_NAME" --notes "Install or update: see README."
