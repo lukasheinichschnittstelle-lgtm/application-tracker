@@ -6,8 +6,8 @@ Drei grobe Phasen. Zuerst entsteht der Kern, der Daten sicher speichert. Er wird
 
 ## Phases
 
-- [ ] **Phase 1: Kern und Speicherung** - Datenmodell, sichere JSON-Datei und Zählweise, getestet auf GitHub Actions
-- [ ] **Phase 2: Oberfläche im Gepard-Design** - Ein Fenster mit Liste, Status, Notizen, Hinzufügen und Kennzahlen, Hell und Dunkel
+- [x] **Phase 1: Kern und Speicherung** - Datenmodell, sichere JSON-Datei und Zählweise, getestet auf GitHub Actions
+- [x] **Phase 2: Oberfläche im Gepard-Design** - Ein Fenster mit Liste, Status, Notizen, Hinzufügen und Kennzahlen, Hell und Dunkel
 - [ ] **Phase 3: Auslieferung und Abnahme** - Release-Zip, Ein-Befehl-Installer und Update, README, Abnahme auf dem Mac
 
 ## Phase Details
@@ -26,7 +26,7 @@ Drei grobe Phasen. Zuerst entsteht der Kern, der Daten sicher speichert. Er wird
 **Prüfung (R20)**: Die Tests laufen in CI, nicht auf dem Rechner des Bauenden. Der Prüfer liest das Testprotokoll aus `gh run view` und gleicht die Kriterien 2–5 je einem Testnamen zu.
 
 Plans:
-- [ ] 01-01: Paket, Datenmodell, Speicher, Zähler, Tests und CI-Workflow
+- [x] 01-01: Paket, Datenmodell, Speicher, Zähler, Tests und CI-Workflow
 
 ### Phase 2: Oberfläche im Gepard-Design
 **Goal**: Eine SwiftUI-App mit einem einzigen Fenster, die alle Features FT-01 bis FT-12 zeigt und bedienbar macht, in den Farben und Schriften des neuen Gepard-Designs.
@@ -37,13 +37,12 @@ Plans:
   2. CI rendert das Hauptfenster mit Beispieldaten (nur im Test) per `ImageRenderer` als PNG in Hell und Dunkel, dazu den leeren Zustand. Die Bilder hängen als Artefakt am Lauf
   3. Auf den Bildern sind die Archivo-Überschrift, die Geist-Mono-Kennzahlen, sechs unterscheidbare Statusfarben und im Dunkeln der Farbnebel zu sehen
   4. Löschen fragt immer nach; ohne Firma lässt sich nichts hinzufügen
-**Plans**: 2 plans (TBD at plan-phase)
+**Plans**: 1 plan
 **UI hint**: yes
 **Prüfung (R20)**: Der Betreuer bzw. eine zweite Sitzung vergleicht die PNG-Artefakte Feature für Feature mit FT-01 bis FT-12 und mit dem Mock-up.
 
 Plans:
-- [ ] 02-01: Design-Tokens (Farben, Schriften) und Hauptfenster
-- [ ] 02-02: Bearbeiten/Löschen, Link, leerer Zustand, Render-Test
+- [x] 02-01: Design-Tokens, Hauptfenster, Bearbeiten/Löschen, Link, leerer Zustand, Render-Test (in einem Plan)
 
 ### Phase 3: Auslieferung und Abnahme
 **Goal**: Die Nutzerin installiert und aktualisiert die App mit einem einzigen Befehl aus dem öffentlichen Repo, ohne Datenverlust.
@@ -58,7 +57,7 @@ Plans:
 **Prüfung (R20)**: Abnahme-Prüfliste auf dem Mac (Ratatouille) durch eine zweite Sitzung (Colette), nicht durch den Bauenden. Belege sind echte, gekürzte Befehlsausgaben. Die Prüfliste steht unten.
 
 Plans:
-- [ ] 03-01: App-Bündel mit Icon „B“, Release-Workflow, install.sh, README, Lizenzen
+- [x] 03-01: App-Bündel mit Icon „B“, Release-Workflow, install.sh, README, Lizenzen
 - [ ] 03-02: Abnahme auf dem Mac nach Prüfliste
 
 ## Abnahme-Prüfliste (Phase 3, R20)
@@ -85,6 +84,6 @@ Auf dem Mac, je Punkt ein Beleg (Befehl und gekürzte Ausgabe oder Bildschirmfot
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Kern und Speicherung | 0/1 | Planned | - |
-| 2. Oberfläche im Gepard-Design | 0/2 | Not started | - |
-| 3. Auslieferung und Abnahme | 0/2 | Not started | - |
+| 1. Kern und Speicherung | 1/1 | Complete | 2026-11-17 |
+| 2. Oberfläche im Gepard-Design | 1/1 | Complete (Abnahme am Mac offen) | 2026-11-17 |
+| 3. Auslieferung und Abnahme | 1/2 | Abnahme am Mac offen | - |

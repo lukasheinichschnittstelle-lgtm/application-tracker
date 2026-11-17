@@ -1,12 +1,12 @@
 ---
 gsd_state_version: '1.0'
-status: planning
+status: executing
 progress:
   total_phases: 3
-  completed_phases: 0
-  total_plans: 5
-  completed_plans: 0
-  percent: 0
+  completed_phases: 2
+  total_plans: 4
+  completed_plans: 3
+  percent: 75
 ---
 
 # Project State
@@ -16,16 +16,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-11-17)
 
 **Core value:** Kein Eintrag geht verloren: Jede Änderung ist sofort sicher auf der Platte.
-**Current focus:** Phase 1 – Kern und Speicherung
+**Current focus:** Phase 3 – Abnahme auf dem Mac
 
 ## Current Position
 
-Phase: 1 of 3 (Kern und Speicherung)
-Plan: 0 of 1 in current phase
-Status: Ready to execute (erst nach OK des Betreuers)
-Last activity: 2026-11-17 — Projekt angelegt, Phase 1 besprochen und geplant
+Phase: 3 of 3 (Auslieferung und Abnahme)
+Plan: 2 of 2 (03-02 Abnahme auf dem Mac)
+Status: v0.1.0 veröffentlicht, Abnahme durch eine zweite Sitzung auf dem Mac ausstehend
+Last activity: 2026-11-17 — Phasen 1–3 gebaut, CI grün, Release v0.1.0
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [████████░░] 75%
 
 ## Accumulated Context
 
@@ -35,15 +35,14 @@ Siehe PROJECT.md → Key Decisions. Bestätigt am 17.11.2026: T1, T2 (MIT), T3/F
 
 ### Pending Todos
 
-Offene Punkte führt die Akte des Betreuers (nicht dieses Repo): T9 (OK zum Bauen und für das öffentliche Repo).
+Offene Punkte führt die Akte des Betreuers (nicht dieses Repo). T9 erledigt 17.11.2026 („go“).
 
 ### Blockers/Concerns
 
-- Bauen erst nach ausdrücklichem OK.
-- Das öffentliche GitHub-Repo wird zu Beginn von Phase 1 angelegt, weil die Tests nur in CI laufen. Auch das geschieht erst nach dem OK.
+- Gatekeeper/Quarantäne, Installer und Update sind erst auf dem Mac belegbar.
 
 ## Session Continuity
 
 Last session: 2026-11-17
-Stopped at: Phase 1 geplant (01-01-PLAN.md)
+Stopped at: Release v0.1.0, wartet auf die Abnahme am Mac
 Resume file: None
