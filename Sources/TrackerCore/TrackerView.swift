@@ -88,15 +88,33 @@ struct Row: View {
     @Binding var app: Application
     let onEdit: () -> Void
     let onDelete: () -> Void
+    @State private var expanded: Bool
     @State private var confirmDelete = false
+    @State private var draft = ""
+
+    init(app: Binding<Application>, expanded: Bool = false, onEdit: @escaping () -> Void, onDelete: @escaping () -> Void) {
+        _app = app
+        _expanded = State(initialValue: expanded)
+        self.onEdit = onEdit
+        self.onDelete = onDelete
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(app.company).font(Theme.medium(15))
-                    if !app.role.isEmpty { Text(app.role).font(Theme.text()).foregroundStyle(Theme.secondary) }
+                HStack(alignment: .top, spacing: 8) {
+                    Image(systemName: expanded ? "chevron.down" : "chevron.right")
+                        .font(.system(size: 11, weight: .semibold)).foregroundStyle(Theme.muted)
+                        .frame(width: 12).padding(.top, 4)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(app.company).font(Theme.medium(15))
+                        if !app.role.isEmpty { Text(app.role).font(Theme.text()).foregroundStyle(Theme.secondary) }
+                    }
                 }
+                .contentShape(Rectangle())
+                .onTapGesture { expanded.toggle() }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityLabel("\(app.company), \(expanded ? "hide" : "show") notes")
                 Spacer()
                 StatusMenu(app: $app)
             }
@@ -106,20 +124,129 @@ struct Row: View {
                 if let url = app.url {
                     Link("Open ad ↗", destination: url).font(Theme.mono(11)).foregroundStyle(Theme.akzent)
                 }
+                Text(app.notes.count == 1 ? "1 note" : "\(app.notes.count) notes")
+                    .font(Theme.mono(11)).foregroundStyle(Theme.muted)
                 Spacer()
                 Button("Edit", action: onEdit).buttonStyle(GepardButton())
                 Button("Delete") { confirmDelete = true }.buttonStyle(GepardButton(destructive: true))
             }
-            TextField("Notes (contact person, next step …)", text: $app.note, axis: .vertical)
-                .textFieldStyle(.plain).font(Theme.text()).lineLimit(1...8)
-                .padding(8)
-                .background(Theme.field, in: RoundedRectangle(cornerRadius: 4))
-                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Theme.edge))
+            if !expanded, let next = nextLine { next }
+            if expanded {
+                Divider().overlay(Theme.edge)
+                NextStepEditor(app: $app)
+                VStack(alignment: .leading, spacing: 6) {
+                    NoteEditor(text: $draft, placeholder: "New note (Return = new paragraph)")
+                    Button("Add note") {
+                        app.notes.append(Note(text: draft.trimmed))
+                        draft = ""
+                    }
+                    .buttonStyle(GepardButton(primary: true))
+                    .disabled(draft.trimmed.isEmpty)
+                }
+                // Newest first; edits go by id, not by index, so deleting cannot hit a stale index.
+                ForEach(app.notes.reversed()) { note in
+                    NoteRow(note: note,
+                            onSave: { text in
+                                if let i = app.notes.firstIndex(where: { $0.id == note.id }) { app.notes[i].text = text }
+                            },
+                            onDelete: { app.notes.removeAll { $0.id == note.id } })
+                }
+            }
         }
         .padding(16)
         .background(Theme.card, in: RoundedRectangle(cornerRadius: 10))
-        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Theme.edge))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(app.isDue() ? Theme.rot : Theme.edge))
         .confirmationDialog("Delete the application at \(app.company)?", isPresented: $confirmDelete) {
+            Button("Delete", role: .destructive, action: onDelete)
+            Button("Cancel", role: .cancel) {}
+        }
+    }
+
+    /// Collapsed rows still show what is next, red once it is due.
+    private var nextLine: Text? {
+        let step = app.nextStep.trimmed
+        guard !step.isEmpty || app.nextStepDate != nil else { return nil }
+        var line = "Next: " + (step.isEmpty ? "–" : step)
+        if let day = app.nextStepDate { line += " · " + day.formatted(date: .abbreviated, time: .omitted) }
+        return Text(line).font(Theme.mono(12)).foregroundColor(app.isDue() ? Theme.rot : Theme.akzent)
+    }
+}
+
+struct NextStepEditor: View {
+    @Binding var app: Application
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Text("NEXT STEP").font(Theme.head(11)).foregroundStyle(app.isDue() ? Theme.rot : Theme.ink)
+            Field(placeholder: "e.g. follow up by phone", text: $app.nextStep)
+            Toggle("Due", isOn: Binding(get: { app.nextStepDate != nil },
+                                        set: { app.nextStepDate = $0 ? (app.nextStepDate ?? Date.now.wholeSeconds) : nil }))
+                .font(Theme.text()).fixedSize()
+            if let day = app.nextStepDate {
+                DatePicker("Due on", selection: Binding(get: { day }, set: { app.nextStepDate = $0.wholeSeconds }),
+                           displayedComponents: .date)
+                    .labelsHidden().fixedSize()
+            }
+            if !app.nextStep.isEmpty || app.nextStepDate != nil {
+                Button("Clear") { app.nextStep = ""; app.nextStepDate = nil }.buttonStyle(GepardButton())
+            }
+        }
+    }
+}
+
+/// Multi-line input: Return starts a new paragraph instead of ending the edit.
+struct NoteEditor: View {
+    @Binding var text: String
+    var placeholder = ""
+
+    var body: some View {
+        TextEditor(text: $text)
+            .font(Theme.text())
+            .scrollContentBackground(.hidden)
+            .frame(minHeight: 70, maxHeight: 220)
+            .padding(4)
+            .overlay(alignment: .topLeading) {
+                if text.isEmpty {
+                    Text(placeholder).font(Theme.text()).foregroundStyle(Theme.muted)
+                        .padding(.leading, 9).padding(.top, 4).allowsHitTesting(false)
+                }
+            }
+            .background(Theme.field, in: RoundedRectangle(cornerRadius: 4))
+            .overlay(RoundedRectangle(cornerRadius: 4).stroke(Theme.edge))
+    }
+}
+
+struct NoteRow: View {
+    let note: Note
+    let onSave: (String) -> Void
+    let onDelete: () -> Void
+    @State private var editText: String?
+    @State private var confirmDelete = false
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Text(note.date.formatted(date: .abbreviated, time: .omitted))
+                .font(Theme.mono(11)).foregroundStyle(Theme.muted)
+                .frame(width: 92, alignment: .leading).padding(.top, 2)
+            if let edit = editText {
+                VStack(alignment: .leading, spacing: 6) {
+                    NoteEditor(text: Binding(get: { edit }, set: { editText = $0 }))
+                    HStack {
+                        Button("Cancel") { editText = nil }.buttonStyle(GepardButton())
+                        Button("Save") { onSave(edit.trimmed); editText = nil }
+                            .buttonStyle(GepardButton(primary: true))
+                            .disabled(edit.trimmed.isEmpty)
+                    }
+                }
+            } else {
+                Text(note.text).font(Theme.text()).textSelection(.enabled)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Button("Edit") { editText = note.text }.buttonStyle(GepardButton())
+                Button("Delete") { confirmDelete = true }.buttonStyle(GepardButton(destructive: true))
+            }
+        }
+        .padding(.vertical, 4)
+        .confirmationDialog("Delete this note?", isPresented: $confirmDelete) {
             Button("Delete", role: .destructive, action: onDelete)
             Button("Cancel", role: .cancel) {}
         }

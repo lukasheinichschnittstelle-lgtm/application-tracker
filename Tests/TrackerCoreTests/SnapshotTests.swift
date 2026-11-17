@@ -31,25 +31,44 @@ final class SnapshotTests: XCTestCase {
         filled.applications = samples.map { company, role, status, note in
             var a = Application(company: company, role: role, link: "example.com/jobs")
             a.setStatus(status, on: Date(timeIntervalSince1970: 1_794_000_000))
-            a.note = note
+            if !note.isEmpty { a.notes = [Note(text: note, date: Date(timeIntervalSince1970: 1_794_100_000))] }
             return a
         }
+        filled.applications[0].nextStep = "Send portfolio PDF"
+        filled.applications[0].nextStepDate = Date(timeIntervalSince1970: 1_794_000_000)  // past: shown as due
+        filled.applications[2].nextStep = "Prepare questions"
+        filled.applications[2].nextStepDate = Date.now.addingTimeInterval(86_400 * 30)
         let empty = Store(directory: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString))
 
         for (name, store, appearance) in [("light", filled, NSAppearance.Name.aqua), ("dark", filled, .darkAqua),
                                           ("empty-light", empty, .aqua), ("empty-dark", empty, .darkAqua)] {
-            let host = NSHostingView(rootView: TrackerView(store: store))
-            host.frame = NSRect(x: 0, y: 0, width: 900, height: 1250)
-            let window = NSWindow(contentRect: host.frame, styleMask: [.titled], backing: .buffered, defer: false)
-            window.appearance = NSAppearance(named: appearance)
-            window.contentView = host
-            host.layoutSubtreeIfNeeded()
-            RunLoop.current.run(until: Date().addingTimeInterval(0.3))
-            let rep = try XCTUnwrap(host.bitmapImageRepForCachingDisplay(in: host.bounds))
-            host.cacheDisplay(in: host.bounds, to: rep)
-            let png = try XCTUnwrap(rep.representation(using: .png, properties: [:]))
-            try png.write(to: out.appendingPathComponent("\(name).png"))
+            try render(TrackerView(store: store), size: NSSize(width: 900, height: 1250), appearance: appearance,
+                       to: out.appendingPathComponent("\(name).png"))
+        }
+        // One expanded row with a multi-paragraph history (FT-04).
+        var open = filled.applications[0]
+        open.notes.append(Note(text: "Call with HR, very friendly.\n\nThey want the portfolio as one PDF, max 10 MB.",
+                               date: Date(timeIntervalSince1970: 1_794_300_000)))
+        for (name, appearance) in [("row-expanded-light", NSAppearance.Name.aqua), ("row-expanded-dark", .darkAqua)] {
+            let row = Row(app: .constant(open), expanded: true, onEdit: {}, onDelete: {})
+                .padding(24).frame(width: 820).background(Theme.page).foregroundStyle(Theme.ink)
+            try render(row, size: NSSize(width: 820, height: 560), appearance: appearance,
+                       to: out.appendingPathComponent("\(name).png"))
         }
         XCTAssertTrue(FileManager.default.fileExists(atPath: out.appendingPathComponent("dark.png").path))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: out.appendingPathComponent("row-expanded-dark.png").path))
+    }
+
+    private func render(_ view: some View, size: NSSize, appearance: NSAppearance.Name, to file: URL) throws {
+        let host = NSHostingView(rootView: view)
+        host.frame = NSRect(origin: .zero, size: size)
+        let window = NSWindow(contentRect: host.frame, styleMask: [.titled], backing: .buffered, defer: false)
+        window.appearance = NSAppearance(named: appearance)
+        window.contentView = host
+        host.layoutSubtreeIfNeeded()
+        RunLoop.current.run(until: Date().addingTimeInterval(0.3))
+        let rep = try XCTUnwrap(host.bitmapImageRepForCachingDisplay(in: host.bounds))
+        host.cacheDisplay(in: host.bounds, to: rep)
+        try XCTUnwrap(rep.representation(using: .png, properties: [:])).write(to: file)
     }
 }

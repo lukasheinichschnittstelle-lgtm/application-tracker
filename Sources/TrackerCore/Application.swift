@@ -24,7 +24,9 @@ public struct Application: Codable, Identifiable, Equatable {
     public var link: String
     public var status: Status = .toApply
     public var sentDate: Date?
-    public var note = ""
+    public var notes: [Note] = []
+    public var nextStep = ""
+    public var nextStepDate: Date?
     public var createdAt = Date.now.wholeSeconds
 
     public init(company: String, role: String = "", link: String = "") {
@@ -37,6 +39,44 @@ public struct Application: Codable, Identifiable, Equatable {
     public mutating func setStatus(_ new: Status, on date: Date = .now) {
         status = new
         if new != .toApply && sentDate == nil { sentDate = date.wholeSeconds }
+    }
+
+    /// The next step is due on its day and stays highlighted until it is changed or cleared.
+    public func isDue(on now: Date = .now) -> Bool {
+        guard let day = nextStepDate else { return false }
+        return Calendar.current.startOfDay(for: day) <= Calendar.current.startOfDay(for: now)
+    }
+
+    private enum Legacy: String, CodingKey { case note }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(UUID.self, forKey: .id)
+        company = try c.decode(String.self, forKey: .company)
+        role = try c.decode(String.self, forKey: .role)
+        link = try c.decode(String.self, forKey: .link)
+        status = try c.decode(Status.self, forKey: .status)
+        sentDate = try c.decodeIfPresent(Date.self, forKey: .sentDate)
+        createdAt = try c.decode(Date.self, forKey: .createdAt)
+        notes = try c.decodeIfPresent([Note].self, forKey: .notes) ?? []
+        nextStep = try c.decodeIfPresent(String.self, forKey: .nextStep) ?? ""
+        nextStepDate = try c.decodeIfPresent(Date.self, forKey: .nextStepDate)
+        // v0.1.0 kept one free-text note; it becomes the first entry, dated when the application was added.
+        let old = try decoder.container(keyedBy: Legacy.self).decodeIfPresent(String.self, forKey: .note) ?? ""
+        if !old.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            notes.insert(Note(text: old, date: createdAt), at: 0)
+        }
+    }
+}
+
+public struct Note: Codable, Identifiable, Equatable {
+    public var id = UUID()
+    public var date: Date
+    public var text: String
+
+    public init(text: String, date: Date = .now) {
+        self.text = text
+        self.date = date.wholeSeconds
     }
 }
 

@@ -31,4 +31,16 @@ final class ApplicationTests: XCTestCase {
         XCTAssertEqual(Status.allCases.map(\.title),
                        ["To apply", "Sent", "Got a reply", "Interview", "Rejected", "Offer"])
     }
+
+    func testNextStepDue() {
+        var a = Application(company: "Acme")
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        XCTAssertFalse(a.isDue(on: now))
+        a.nextStepDate = now.addingTimeInterval(86_400 * 2)
+        XCTAssertFalse(a.isDue(on: now))
+        a.nextStepDate = now
+        XCTAssertTrue(a.isDue(on: now))
+        a.nextStepDate = now.addingTimeInterval(-86_400 * 3)
+        XCTAssertTrue(a.isDue(on: now))
+    }
 }
