@@ -59,7 +59,7 @@ struct GepardButton: ButtonStyle {
     }
 }
 
-/// Dark mode only: four blurred colour blobs behind the panel (gepard.css --nebel).
+/// Dark mode only: four soft colour fields behind the panel, like the radial gradients in gepard.css --nebel.
 struct Nebel: View {
     @Environment(\.colorScheme) private var scheme
 
@@ -67,23 +67,25 @@ struct Nebel: View {
         if scheme == .dark {
             GeometryReader { g in
                 ZStack {
-                    blob(0x12266e, 0.15, 0.20, g.size)
-                    blob(0x4a3d22, 0.85, 0.30, g.size)
-                    blob(0x3b2f4a, 0.60, 0.90, g.size)
-                    blob(0x183c52, 0.30, 0.85, g.size)
+                    blob(0x12266e, 0.15, 0.20, 0.40, 0.60, g.size)
+                    blob(0x4a3d22, 0.85, 0.30, 0.40, 0.60, g.size)
+                    blob(0x3b2f4a, 0.60, 0.90, 0.45, 0.60, g.size)
+                    blob(0x183c52, 0.30, 0.85, 0.35, 0.50, g.size)
                 }
-                .blur(radius: 90)
                 .opacity(0.55)
             }
             .ignoresSafeArea()
+            .allowsHitTesting(false)
         }
     }
 
-    private func blob(_ hex: UInt32, _ x: CGFloat, _ y: CGFloat, _ size: CGSize) -> some View {
-        Ellipse()
-            .fill(Color(nsColor: NSColor(srgbRed: CGFloat(hex >> 16 & 0xff) / 255, green: CGFloat(hex >> 8 & 0xff) / 255,
-                                         blue: CGFloat(hex & 0xff) / 255, alpha: 1)))
-            .frame(width: size.width * 0.8, height: size.height * 1.2)
+    /// One CSS radial-gradient(rx% ry% at x% y%, colour, transparent).
+    private func blob(_ hex: UInt32, _ x: CGFloat, _ y: CGFloat, _ rx: CGFloat, _ ry: CGFloat, _ size: CGSize) -> some View {
+        let color = Color(nsColor: NSColor(srgbRed: CGFloat(hex >> 16 & 0xff) / 255, green: CGFloat(hex >> 8 & 0xff) / 255,
+                                           blue: CGFloat(hex & 0xff) / 255, alpha: 1))
+        return EllipticalGradient(colors: [color, color.opacity(0)], center: .center,
+                                  startRadiusFraction: 0, endRadiusFraction: 0.5)
+            .frame(width: size.width * rx * 2, height: size.height * ry * 2)
             .position(x: size.width * x, y: size.height * y)
     }
 }
