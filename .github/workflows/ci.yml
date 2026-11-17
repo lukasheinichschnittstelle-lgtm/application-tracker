@@ -35,4 +35,5 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" build/ApplicationTracker.zip --title "$GITHUB_REF_NAME" --notes "Install or update: see README."
+        run: |
+          gh release create "$GITHUB_REF_NAME" build/ApplicationTracker.zip --title "$GITHUB_REF_NAME" --notes "Install or update: see README."
