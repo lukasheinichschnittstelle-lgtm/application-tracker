@@ -146,7 +146,8 @@ struct StatusMenu: View {
             .background(filled ? color : .clear, in: Capsule())
             .overlay(Capsule().stroke(color))
         }
-        .menuStyle(.borderlessButton)
+        .menuStyle(.button)
+        .buttonStyle(.plain)
         .menuIndicator(.hidden)
         .fixedSize()
         .accessibilityLabel("Status: \(app.status.title)")
