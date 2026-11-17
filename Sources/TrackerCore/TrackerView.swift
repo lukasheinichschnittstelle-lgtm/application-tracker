@@ -203,7 +203,7 @@ struct NoteEditor: View {
         TextEditor(text: $text)
             .font(Theme.text())
             .scrollContentBackground(.hidden)
-            .frame(minHeight: 70, maxHeight: 220)
+            .frame(height: 90)  // TextEditor fills any free height; longer text scrolls inside
             .padding(4)
             .overlay(alignment: .topLeading) {
                 if text.isEmpty {
