@@ -48,7 +48,7 @@ Plans:
 ### Phase 3: Auslieferung und Abnahme
 **Goal**: Die Nutzerin installiert und aktualisiert die App mit einem einzigen Befehl aus dem öffentlichen Repo, ohne Datenverlust.
 **Depends on**: Phase 2
-**Requirements**: INST-01, INST-02, INST-03, INST-04
+**Requirements**: FT-13, INST-01, INST-02, INST-03, INST-04
 **Success Criteria** (what must be TRUE):
   1. Der Tag `v0.1.0` erzeugt ein Release mit `ApplicationTracker.zip`, darin ein ad-hoc signiertes `Application Tracker.app` (`codesign --verify --deep --strict` grün in CI)
   2. `curl -fsSL https://raw.githubusercontent.com/lukasheinichschnittstelle-lgtm/application-tracker/main/install.sh | bash` installiert und startet die App auf einem Mac mit Apple Silicon, ohne Gatekeeper-Dialog
@@ -58,7 +58,7 @@ Plans:
 **Prüfung (R20)**: Abnahme-Prüfliste auf dem Mac (Ratatouille) durch eine zweite Sitzung (Colette), nicht durch den Bauenden. Belege sind echte, gekürzte Befehlsausgaben. Die Prüfliste steht unten.
 
 Plans:
-- [ ] 03-01: App-Bündel, Release-Workflow, install.sh, README, Lizenzen
+- [ ] 03-01: App-Bündel mit Icon „B“, Release-Workflow, install.sh, README, Lizenzen
 - [ ] 03-02: Abnahme auf dem Mac nach Prüfliste
 
 ## Abnahme-Prüfliste (Phase 3, R20)
@@ -79,6 +79,7 @@ Auf dem Mac, je Punkt ein Beleg (Befehl und gekürzte Ausgabe oder Bildschirmfot
 12. INST-04: Den Befehl erneut ausführen; die App läuft neu, alle Einträge sind da
 13. Kein Netz: `lsof -i -a -p $(pgrep -x ApplicationTracker)` ist leer
 14. Deinstallation nach README funktioniert
+15. FT-13: Im Dock und im Finder erscheint das „B“-Icon
 
 ## Progress
 

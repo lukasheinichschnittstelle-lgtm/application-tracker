@@ -65,14 +65,13 @@ Ein Swift-Paket mit der Bibliothek `TrackerCore` (Datenmodell, Speicher, Zähler
 <code_context>
 ## Existing Code Insights
 
-Greenfield: Es gibt noch keinen Code. Der Bau-Server hat **keine** Swift-Werkzeuge. Kompiliert und getestet wird nur in CI. Darum gilt: kleine Commits, und nach jedem Push das Ergebnis mit `gh run watch` abwarten.
+Greenfield: Es gibt noch keinen Code. Der Bau-Server hat **keine** Swift-Werkzeuge. Kompiliert und getestet wird nur in CI (F8: bleibt so, bestätigt 17.11.2026). Darum gilt: kleine Commits, und nach jedem Push das Ergebnis mit `gh run watch` abwarten.
 
 </code_context>
 
 <deferred>
 ## Deferred Ideas
 
-- Swift-Werkzeuge auf dem Bau-Server, um `TrackerCore` lokal zu testen (F8). Nur nach OK, denn installieren ist in der Planung ausgeschlossen.
 - Datum der Rückmeldung als eigenes Feld (v2).
 
 </deferred>

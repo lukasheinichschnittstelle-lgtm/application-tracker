@@ -31,11 +31,11 @@ Progress: [░░░░░░░░░░] 0%
 
 ### Decisions
 
-Siehe PROJECT.md → Key Decisions. Bestätigt am 17.11.2026: T1, T2 (MIT), T3/F7, T5, T6, T7, F2, F3, F5.
+Siehe PROJECT.md → Key Decisions. Bestätigt am 17.11.2026: T1, T2 (MIT), T3/F7, T5, T6, T7, T8, T10, F2, F3, F5, F8, F9.
 
 ### Pending Todos
 
-Offene Punkte führt die Akte des Betreuers (nicht dieses Repo): T8 (App-Icon), F8 (Swift auf dem Bau-Server).
+Offene Punkte führt die Akte des Betreuers (nicht dieses Repo): T9 (OK zum Bauen und für das öffentliche Repo).
 
 ### Blockers/Concerns
 

@@ -23,6 +23,7 @@ Die IDs `FT-01` bis `FT-12` sind die **festen Feature-Nummern** der Mockup-Schle
 | FT-10 | Beim Start wird die vorige Datendatei als Sicherungskopie abgelegt. Eine unlesbare Datei wird nie überschrieben, sondern beiseitegelegt, mit Hinweis. Menüpunkt „Show Data in Finder“ | Vorschlag, bestätigt 17.11.2026 (T7, ersetzt Export/Import) |
 | FT-11 | Aussehen nach dem neuen Gepard-Design (Farben, Schriften, Paneel, eckige Knöpfe, Umriss-Etiketten), Hell/Dunkel folgt dem System, im Dunkeln mit Farbnebel | Q8 |
 | FT-12 | Leere Liste mit kurzem Hinweis „Add your first application“ | **Vorschlag**, Folge aus T5 (keine Demo) |
+| FT-13 | App-Icon ganz schlicht: ein großes „B“ (für Bewerbung), Archivo 800, hell auf dunklem Grund, in CI erzeugt | T8, Betreuer 17.11.2026 |
 
 ### Auslieferung
 
@@ -33,7 +34,7 @@ Die IDs `FT-01` bis `FT-12` sind die **festen Feature-Nummern** der Mockup-Schle
 
 ### Checkliste für v1
 
-- [ ] **FT-01** … **FT-12** umgesetzt und nach [ROADMAP.md](ROADMAP.md) geprüft
+- [ ] **FT-01** … **FT-13** umgesetzt und nach [ROADMAP.md](ROADMAP.md) geprüft
 
 ## v2 Requirements
 
@@ -41,7 +42,6 @@ Bewusst aufgeschoben, kommt nur bei echtem Bedarf:
 
 - Suche oder Filter nach Status
 - Datum der Rückmeldung als eigenes Feld
-- App-Icon (v1 zeigt das Standard-Icon, siehe T8)
 - Export als CSV
 
 ## Out of Scope
@@ -74,14 +74,15 @@ Bewusst aufgeschoben, kommt nur bei echtem Bedarf:
 | FT-08 | Phase 2 | Pending |
 | FT-11 | Phase 2 | Pending |
 | FT-12 | Phase 2 | Pending |
+| FT-13 | Phase 3 | Pending |
 | INST-01 | Phase 3 | Pending |
 | INST-02 | Phase 1 (Test-Lauf), Phase 3 (Release) | Pending |
 | INST-03 | Phase 3 | Pending |
 | INST-04 | Phase 3 | Pending |
 
 **Coverage:**
-- v1 requirements: 16 total (12 Features, 4 Auslieferung)
-- Mapped to phases: 16
+- v1 requirements: 17 total (13 Features, 4 Auslieferung)
+- Mapped to phases: 17
 - Unmapped: 0 ✓
 
 ---
